@@ -6,14 +6,34 @@ input {
 }
 #buttons {
     padding-top: 15px;
+    padding-bottom: 15px;
     text-align: center;
     display: flex;
-    width: 232px;
+    width: 285px;
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px black solid;
     justify-content: center;
 }
+.btn {
+    height: 40px;
+}
 #alphabet {
     float: left;
+    margin-right: 10px;
+}
+#sim {
+    float: left;
+    margin-right: 30px;
+    text-align: center;
+    margin-left: 11px;
+}
+#results {
+    width: 620px;
+    display: none;
+}
+#simulation {
+    border: 1px black solid;
+    height: 247px;
+    width: 573px;
 }
