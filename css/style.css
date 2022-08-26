@@ -1,0 +1,19 @@
+body {
+    font-family: "메이플스토리";
+}
+input {
+    font-family: "메이플스토리";
+}
+#buttons {
+    padding-top: 15px;
+    text-align: center;
+    display: flex;
+    width: 232px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px black solid;
+    justify-content: center;
+}
+#alphabet {
+    float: left;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>알파벳 상자 시뮬레이터</title>
+    <script src="script/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>알파벳 상자 시뮬레이터</h1>
+    </header>
+    <p>알파벳 상자 시뮬레이터입니다.</p>
+    <p>* 정확한 확률이 공개되지 않은 관계로 통계적 확률과 체감 확률을 바탕으로 제작되었습니다. 실제 확률과 다를 확률이 매우 높습니다.&nbsp;
+    <input type="button" value="확률 정보" onclick="showProbabilities()"></p>
+    <div id="buttons">
+        <span id="alphabet">
+            <input type="button" value="알파벳 뽑기 테스트" onclick="testFunction()">
+            <p id="randomAlpha">알파벳</p>
+        </span>
+        <span id="number">
+            <input type="button" value="숫자 뽑기 테스트" onclick="testFunction2()">
+            <p id="randomNum">숫자</p>
+        </span>
+    </div>
+    <p id="resultsAlpha">알파벳 누적:&nbsp;</p>
+</body>
+</html>
