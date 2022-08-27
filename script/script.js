@@ -76,7 +76,7 @@ function highBoxSimulate() {
 }
 
 function randomAlphabet(array) {
-    rand = getRandomInt(weightsTotal);
+    rand = getRandomInt(weightsTotal + 1);
     tmp = 0;
     for (var i = 0; i < array.length; i++) {
         tmp += array[i];
