@@ -1,5 +1,5 @@
-const mProb = 3 / 7;
-const lProb = 97 / 15;
+const mProb = 45;
+const lProb = 679;
 
 let middleCounts = 0;
 
@@ -15,10 +15,12 @@ const normalBoxWeights = [mProb, lProb, lProb, lProb, mProb,
                     lProb, lProb, 0, mProb, lProb,
                     lProb, lProb, mProb, lProb, lProb, lProb];
 const highBoxWeights = [0, 0, 0, 0, 0,
-                    0, 0, 25, 0, 0,
-                    0, 0, 25, 25, 0,
-                    0, 0, 25, 0, 0,
+                    0, 0, 2625, 0, 0,
+                    0, 0, 2625, 2625, 0,
+                    0, 0, 2625, 0, 0,
                     0, 0, 0, 0, 0, 0];
+
+const weightsTotal = 10500
 
 const middleAlphas = ['A', 'E', 'I', 'L', 'O', 'S', 'W'];
 const highAlphas = ['H', 'M', 'N', 'R'];
@@ -26,6 +28,10 @@ const highAlphas = ['H', 'M', 'N', 'R'];
 let boxTotalCounts = Array(26).fill(0);
 
 const resultsAlphaElement = document.getElementById("resultsAlpha");
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
 function setButtonCommands() {
     const normalBoxBtn = document.getElementById("normalBox");
@@ -39,8 +45,8 @@ function setButtonCommands() {
 
 function showProbabilities() {
     const probString = "<일반 상자 확률 정보>\n\n" + 
-    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + mProb.toFixed(2) + "%\n" +
-    "희귀도 하: 알파벳 하나당 " + lProb.toFixed(2) + "%\n\n" +
+    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 약 " + ((mProb / weightsTotal) * 100).toFixed(2) + "%\n" +
+    "희귀도 하: 알파벳 하나당 약 " + ((lProb / weightsTotal) * 100).toFixed(2) + "%\n\n" +
     "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.\n\n" + 
     "제작: 인벤 Illllilllli";
     alert(probString);
@@ -70,11 +76,11 @@ function highBoxSimulate() {
 }
 
 function randomAlphabet(array) {
-    rand = Math.random() * 100;
+    rand = getRandomInt(weightsTotal);
     tmp = 0;
     for (var i = 0; i < array.length; i++) {
         tmp += array[i];
-        if (rand < tmp) {
+        if (rand <= tmp) {
              return String.fromCharCode(i + 'A'.charCodeAt(0));
         }
     }
