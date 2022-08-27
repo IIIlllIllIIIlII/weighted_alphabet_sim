@@ -1,5 +1,5 @@
-const MProb = 1;
-const LProb = 6.2;
+const MProb = 3 / 7;
+const LProb = 97 / 15;
 middleCounts = 0;
 
 totalNormalCounts = 0;
@@ -22,32 +22,32 @@ boxTotalCounts = Array(26).fill(0);
 
 function showProbabilities() {
     const probString = "<일반 상자 확률 정보>\n\n" + 
-    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + MProb + "%\n" +
-    "희귀도 하: 알파벳 하나당 " + LProb + "%\n\n" +
+    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + MProb.toFixed(2) + "%\n" +
+    "희귀도 하: 알파벳 하나당 " + LProb.toFixed(2) + "%\n\n" +
     "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.";
     alert(probString);
 }
 
-function testFunction() {
+function normalBoxSimulate() {
     randAlpha = randomAlphabet(normalBoxWeights);
     document.getElementById("resultsAlpha").innerText = "알파벳 " + randAlpha + "가 나왔습니다!";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
     if (['A', 'E', 'I', 'L', 'O', 'S', 'W'].includes(randAlpha)) {
         middleCounts += 1;
-        document.getElementById("resultsAlpha").innerText += " (희귀도 중)"
+        document.getElementById("resultsAlpha").innerHTML += " <strong>(희귀도 중)</strong>"
     }
     totalNormalCounts += 1;
     document.getElementById("middleCounts").innerText = "희귀도 중 횟수: " + middleCounts;
-    document.getElementById("totalNormalCounts").innerText = "일반 상자 총 시행횟수: " + totalNormalCounts;
+    document.getElementById("totalNormalCounts").innerText = "일반 상자 총 시행 횟수: " + totalNormalCounts;
     showTotal();
 }
 
-function testFunction2() {
+function highBoxSimulate() {
     randAlpha = randomAlphabet(highBoxWeights);
     document.getElementById("resultsAlpha").innerText = "알파벳 " + randAlpha + "가 나왔습니다!";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
     totalHighCounts += 1;
-    document.getElementById("totalHighCounts").innerText = "불꽃 상자 총 시행횟수: " + totalHighCounts;
+    document.getElementById("totalHighCounts").innerText = "불꽃 상자 총 시행 횟수: " + totalHighCounts;
     showTotal();
 }
 
@@ -69,7 +69,7 @@ function showTotal() {
         for (var j = 0; j < 3; j++) {
             idx = j * 12 + i
             if (idx <= 25) {
-                document.getElementById("total").innerHTML += String.fromCharCode(idx + 'A'.charCodeAt(0)) + ": " + boxTotalCounts[idx] + "회&emsp;&emsp;&emsp;";
+                document.getElementById("total").innerHTML += String.fromCharCode(idx + 'A'.charCodeAt(0)) + ": " + boxTotalCounts[idx] + "회&emsp;";
             }
         } 
         document.getElementById("total").innerText += '\n';

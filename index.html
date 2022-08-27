@@ -10,16 +10,16 @@
         <h1>알파벳 상자 시뮬레이터</h1>
     </header>
     <p>알파벳 상자 시뮬레이터입니다.</p>
-    <p>* 정확한 확률이 공개되지 않은 관계로 임의의 확률을 지정하였습니다. 실제 확률과 다를 확률이 매우 높습니다.&nbsp;
+    <p>* 정확한 확률이 공개되지 않은 관계로 임의로 확률을 지정하였습니다. 실제 확률과 다를 확률이 매우 높습니다.&nbsp;
     <input type="button" value="확률 정보" onclick="showProbabilities()"></p>
     <section id="simulation">
         <div id="sim">
             <div id="buttons">
-                <span id="alphabet">
-                    <input class="btn" type="button" value="일반 상자 시뮬레이션" onclick="testFunction()">
+                <span id="simNormal">
+                    <input class="btn" type="button" value="일반 상자 시뮬레이션" onclick="normalBoxSimulate()">
                 </span>
-                <span id="number">
-                    <input class="btn" type="button" value="불꽃 상자 시뮬레이션" onclick="testFunction2()">
+                <span id="simHigh">
+                    <input class="btn" type="button" value="불꽃 상자 시뮬레이션" onclick="highBoxSimulate()">
                 </span>
             </div>
             <p id="resultsAlpha">알파벳을 뽑아보세요!&nbsp;</p>
@@ -29,7 +29,7 @@
         </div>
         <div id="results">
             <p id="total"></p>
-    </div>
+        </div>
     </section>
 </body>
 </html>

@@ -18,7 +18,7 @@ input {
 .btn {
     height: 40px;
 }
-#alphabet {
+#simNormal {
     float: left;
     margin-right: 10px;
 }
@@ -27,13 +27,18 @@ input {
     margin-right: 30px;
     text-align: center;
     margin-left: 11px;
+    margin-right: 55px;
 }
 #results {
-    width: 620px;
+    float: left;
     display: none;
 }
 #simulation {
     border: 1px black solid;
-    height: 247px;
-    width: 573px;
+    float: left;
+    width: 556px;
+    height: 243.2px;
+}
+strong {
+    color: red;
 }
