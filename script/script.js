@@ -25,6 +25,8 @@ const highAlphas = ['H', 'M', 'N', 'R'];
 
 let boxTotalCounts = Array(26).fill(0);
 
+const resultsAlphaElement = document.getElementById("resultsAlpha");
+
 function setButtonCommands() {
     const normalBoxBtn = document.getElementById("normalBox");
     const highBoxBtn = document.getElementById("highBox");
@@ -39,12 +41,12 @@ function showProbabilities() {
     const probString = "<일반 상자 확률 정보>\n\n" + 
     "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + mProb.toFixed(2) + "%\n" +
     "희귀도 하: 알파벳 하나당 " + lProb.toFixed(2) + "%\n\n" +
-    "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.";
+    "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.\n\n" + 
+    "제작: 인벤 Illllilllli";
     alert(probString);
 }
 
 function normalBoxSimulate() {
-    const resultsAlphaElement = document.getElementById("resultsAlpha");
     let randAlpha = randomAlphabet(normalBoxWeights);
     resultsAlphaElement.innerHTML = "알파벳 <strong>" + randAlpha + "</strong>가 나왔습니다!";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
@@ -60,7 +62,7 @@ function normalBoxSimulate() {
 
 function highBoxSimulate() {
     randAlpha = randomAlphabet(highBoxWeights);
-    document.getElementById("resultsAlpha").innerHTML = "알파벳 <strong>" + randAlpha + "</strong>가 나왔습니다! <strong id='high'>(희귀도 상)</strong>";
+    resultsAlphaElement.innerHTML = "알파벳 <strong>" + randAlpha + "</strong>가 나왔습니다! <strong id='high'>(희귀도 상)</strong>";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
     totalHighCounts += 1;
     document.getElementById("totalHighCounts").innerHTML = "불꽃 상자 총 시행 횟수: " + totalHighCounts;
