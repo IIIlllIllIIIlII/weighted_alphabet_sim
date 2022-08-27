@@ -1,53 +1,69 @@
-const MProb = 3 / 7;
-const LProb = 97 / 15;
-middleCounts = 0;
+const mProb = 3 / 7;
+const lProb = 97 / 15;
 
-totalNormalCounts = 0;
-totalHighCounts = 0;
+let middleCounts = 0;
+
+let totalNormalCounts = 0;
+let totalHighCounts = 0;
 
 // 불꽃상자: h, m, n, r
 // 희귀도 중: a, e, i, l, o, s, w
 // 희귀도 하: 나머지
-normalBoxWeights = [MProb, LProb, LProb, LProb, MProb,
-                    LProb, LProb, 0, MProb, LProb,
-                    LProb, MProb, 0, 0, MProb,
-                    LProb, LProb, 0, MProb, LProb,
-                    LProb, LProb, MProb, LProb, LProb, LProb];
-highBoxWeights = [0, 0, 0, 0, 0,
+const normalBoxWeights = [mProb, lProb, lProb, lProb, mProb,
+                    lProb, lProb, 0, mProb, lProb,
+                    lProb, mProb, 0, 0, mProb,
+                    lProb, lProb, 0, mProb, lProb,
+                    lProb, lProb, mProb, lProb, lProb, lProb];
+const highBoxWeights = [0, 0, 0, 0, 0,
                     0, 0, 25, 0, 0,
                     0, 0, 25, 25, 0,
                     0, 0, 25, 0, 0,
                     0, 0, 0, 0, 0, 0];
-boxTotalCounts = Array(26).fill(0);
+
+const middleAlphas = ['A', 'E', 'I', 'L', 'O', 'S', 'W'];
+const highAlphas = ['H', 'M', 'N', 'R'];
+
+let boxTotalCounts = Array(26).fill(0);
+
+function setButtonCommands() {
+    const normalBoxBtn = document.getElementById("normalBox");
+    const highBoxBtn = document.getElementById("highBox");
+    const probBtn = document.getElementById("prob");
+
+    normalBoxBtn.addEventListener("click", normalBoxSimulate);
+    highBoxBtn.addEventListener("click", highBoxSimulate);
+    probBtn.addEventListener("click", showProbabilities);
+}
 
 function showProbabilities() {
     const probString = "<일반 상자 확률 정보>\n\n" + 
-    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + MProb.toFixed(2) + "%\n" +
-    "희귀도 하: 알파벳 하나당 " + LProb.toFixed(2) + "%\n\n" +
+    "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 " + mProb.toFixed(2) + "%\n" +
+    "희귀도 하: 알파벳 하나당 " + lProb.toFixed(2) + "%\n\n" +
     "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.";
     alert(probString);
 }
 
 function normalBoxSimulate() {
-    randAlpha = randomAlphabet(normalBoxWeights);
-    document.getElementById("resultsAlpha").innerText = "알파벳 " + randAlpha + "가 나왔습니다!";
+    const resultsAlphaElement = document.getElementById("resultsAlpha");
+    let randAlpha = randomAlphabet(normalBoxWeights);
+    resultsAlphaElement.innerHTML = "알파벳 <strong>" + randAlpha + "</strong>가 나왔습니다!";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
-    if (['A', 'E', 'I', 'L', 'O', 'S', 'W'].includes(randAlpha)) {
+    if (middleAlphas.includes(randAlpha)) {
         middleCounts += 1;
-        document.getElementById("resultsAlpha").innerHTML += " <strong>(희귀도 중)</strong>"
+        resultsAlphaElement.innerHTML += " <strong id='middle'>(희귀도 중)</strong>";
     }
     totalNormalCounts += 1;
-    document.getElementById("middleCounts").innerText = "희귀도 중 횟수: " + middleCounts;
-    document.getElementById("totalNormalCounts").innerText = "일반 상자 총 시행 횟수: " + totalNormalCounts;
+    document.getElementById("middleCounts").innerHTML = "희귀도 중 횟수: " + middleCounts;
+    document.getElementById("totalNormalCounts").innerHTML = "일반 상자 총 시행 횟수: " + totalNormalCounts;
     showTotal();
 }
 
 function highBoxSimulate() {
     randAlpha = randomAlphabet(highBoxWeights);
-    document.getElementById("resultsAlpha").innerText = "알파벳 " + randAlpha + "가 나왔습니다!";
+    document.getElementById("resultsAlpha").innerHTML = "알파벳 <strong>" + randAlpha + "</strong>가 나왔습니다! <strong id='high'>(희귀도 상)</strong>";
     boxTotalCounts[randAlpha.charCodeAt(0) - 'A'.charCodeAt(0)] += 1;
     totalHighCounts += 1;
-    document.getElementById("totalHighCounts").innerText = "불꽃 상자 총 시행 횟수: " + totalHighCounts;
+    document.getElementById("totalHighCounts").innerHTML = "불꽃 상자 총 시행 횟수: " + totalHighCounts;
     showTotal();
 }
 
@@ -63,15 +79,31 @@ function randomAlphabet(array) {
 }
 
 function showTotal() {
-    document.getElementById("results").style.display = "block";
-    document.getElementById("total").innerText = "";
-    for (var i = 0; i < 12; i++) {
-        for (var j = 0; j < 3; j++) {
-            idx = j * 12 + i
+    const totalElement = document.getElementById("total");
+    let htmlString = "<table><tbody>";
+    let charAlpha;
+
+    for (let i = 0; i < 12; i++) {
+        htmlString += "<tr>";
+        for (let j = 0; j < 3; j++) {
+            let idx = j * 12 + i;
             if (idx <= 25) {
-                document.getElementById("total").innerHTML += String.fromCharCode(idx + 'A'.charCodeAt(0)) + ": " + boxTotalCounts[idx] + "회&emsp;";
+                charAlpha = String.fromCharCode(idx + 'A'.charCodeAt(0));
+                tmpString = charAlpha + ": " + boxTotalCounts[idx] + "회";
+                if (middleAlphas.includes(charAlpha)) {
+                    htmlString += "<td><strong id='middle'>" + tmpString + "</strong></td>";
+                } else if (highAlphas.includes(charAlpha)) {
+                    htmlString += "<td><strong id='high'>" + tmpString + "</strong></td>";
+                } else {
+                    htmlString += "<td>" + tmpString + "</td>";
+                }
             }
         } 
-        document.getElementById("total").innerText += '\n';
+        htmlString += "</tr>";
     }
+    htmlString += "</tbody></table>";
+    totalElement.innerHTML = htmlString;
 }
+
+setButtonCommands();
+showTotal();

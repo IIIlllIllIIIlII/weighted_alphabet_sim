@@ -24,21 +24,26 @@ input {
 }
 #sim {
     float: left;
-    margin-right: 30px;
     text-align: center;
     margin-left: 11px;
-    margin-right: 55px;
+    margin-right: 11px;
 }
 #results {
     float: left;
-    display: none;
+    border-left: 1px black solid;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 #simulation {
     border: 1px black solid;
     float: left;
-    width: 556px;
-    height: 243.2px;
 }
-strong {
+table {
+    border-spacing: 14px 4px;
+}
+#middle {
+    color: blue;
+}
+#high {
     color: red;
 }
