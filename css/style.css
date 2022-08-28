@@ -37,6 +37,7 @@ input {
 #simulation {
     border: 1px black solid;
     float: left;
+    margin-right: 27px;
 }
 table {
     border-spacing: 14px 4px;
@@ -46,4 +47,57 @@ table {
 }
 #high {
     color: red;
+}
+.clear {
+    clear: both;
+    float: left;
+}
+#repetition {
+    border: 1px black solid;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+#inputs {
+    padding: 10px
+}
+#numberInput {
+    width: 59px;
+    text-align: center;
+}
+#custom {
+    float: left;
+    text-align: center;
+}
+.probInput {
+    width: 43px;
+    text-align: center;
+    margin-left: 5px;
+}
+#inputProb {
+    float: left;
+}
+#middleInput {
+    margin-bottom: 8px;
+}
+#setting {
+    border: 1px black solid;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right:10px;
+    margin-top: 20px;
+}
+#probSetting {
+    display: inline-block;
+}
+#probSet {
+    margin-left: 10px;
+    height: 48.8px;
+    width: 48.8px;
+}
+#initialize {
+    height: 47px;
+    width: 221.18px;
+    margin-top: 32px;
 }

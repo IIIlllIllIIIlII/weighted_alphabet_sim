@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>알파벳 상자 시뮬레이터</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://pagecdn.io/lib/mathjs/11.0.1/math.js" crossorigin="anonymous"  ></script>
 </head>
 <body>
     <header>
@@ -25,10 +26,47 @@
             <p id="middleCounts">희귀도 중 횟수: 0</p>
             <p id="totalNormalCounts">일반 상자 총 시행 횟수: 0</p>
             <p id="totalHighCounts">불꽃 상자 총 시행 횟수: 0</p>
+            <p><br><strong id="middle">푸른색: 희귀도 중 알파벳</strong></p>
+            <p><strong id="high">빨간색: 불꽃 상자 알파벳</strong>
+            </p>
         </div>
         <div id="results">
             <p id="total"></p>
         </div>
+    </section>
+    <section id="custom">
+        <section id="repetition">
+            <p>반복 시행</p>
+            <div id="radioButtons">
+                <input type="radio" name="radioButtons" id="choiceNormal" value="normal"><label for="choiceNormal">일반 상자</label>
+                <input type="radio" name="radioButtons" id="choiceHigh" value="high"><label for="choiceHigh">불꽃 상자</label>
+            </div>
+            <div id="inputs">
+                <span id="times">횟수:</span>
+                <input type="number" id="numberInput">
+                <span>회</span>
+                <input type="button" id="repeat" value="시행">
+            </div>
+        </section>
+        <section id="setting">
+            <p>일반 상자 확률 설정</p>
+            <div id="probSetting">
+                <div id="inputProb">
+                    <div id="middleInput">
+                        <span id="middle">희귀도 중:</span>
+                        <input type="number" class="probInput">
+                        <span>%</span>
+                    </div>
+                    <div id="lowInput">
+                        <span id="low">희귀도 하:</span>
+                        <input type="number" class="probInput">
+                        <span>%</span>
+                    </div>
+                </div>
+                <input type="button" id="probSet" value="설정">
+            </div>
+        </section>
+        <input type="button" id="initialize" value="초기화">
     </section>
 </body>
 <script src="script/script.js"></script>

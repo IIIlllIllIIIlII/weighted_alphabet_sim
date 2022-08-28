@@ -11,3 +11,7 @@ Weighted Alphabet Simulator
 - 희귀도 하 알파벳: 약 6.47%
 <br>
 * 같은 희귀도끼리는 같은 확률을 가짐을 전제로 합니다.
+** 실제 구현은 10500회 기준 획득 횟수로 구현되어 있습니다.
+
+## Library References:
+- mathjs.js: https://https://mathjs.org/
