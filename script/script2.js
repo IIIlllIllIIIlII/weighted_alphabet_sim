@@ -118,15 +118,42 @@ class SimulationResult {
 
 class HTMLElementController {
     constructor() {
-        throw new Error("Cannot initiate a static class.")
+        this.bodyElem = document.body;
+        this.tdElems = new Map();
     }
-    static createTable() {
-    
+
+    /**
+     * 알파벳 결과 테이블 생성
+     */
+    createTable() {
+        let tableElem = document.createElement("table");
+        let tbodyElem = document.createElement("tbody");
+        for (let i = 0; i < 12; i++) {
+            let trElem = document.createElement("tr");
+            
+            for (let j = 0; j < 3; j++) {
+                let alpha = String.fromCharCode('A'.charCodeAt(0) + (j * 12) + i);
+
+                if (alpha >= 'A' && alpha <= 'Z') {
+                    let tdElem = document.createElement("td");
+
+                    tdElem.textContent = alpha + ": 0개";
+
+                    tdElems.set(alpha, tdElem);
+
+                    trElem.appendChild(tdElem);
+                }
+            }
+
+            tbodyElem.appendChild(trElem);
+        }
+        tableElem.appendChild(tbodyElem);
+        this.bodyElem.appendChild(tableElem);
     }
-    static rewriteTable() {
+    rewriteTable() {
 
     }
-    static rewriteResultText() {
+    rewriteResultText() {
         
     }
 
