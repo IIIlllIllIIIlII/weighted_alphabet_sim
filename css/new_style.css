@@ -1,0 +1,67 @@
+* {
+    font-family: "메이플스토리";
+}
+.container {
+    border: 1px solid black;
+}
+strong.middle {
+    color: blue;
+}
+strong.high {
+    color: red;
+}
+.inlineFlex {
+    display: inline-flex;
+}
+.textCenter {
+    text-align: center;
+}
+#simBtns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 285px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.noBorder {
+    border: none;
+}
+.simBtn {
+    height: 40px;
+}
+table {
+    border-spacing: 14px 4px;
+}
+#resultTable {
+    border-left: 1px solid black;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: left;
+}
+#resultTable > div {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+#info {
+    margin-top: 33.6px;
+}
+body>div:nth-child(2) {
+    margin-bottom: 16px;
+}
+#simulation {
+    margin-left: 11px;
+    margin-right: 11px;
+}
+
+/* 웹페이지 정상 작동을 위한 임시 코드 */
+#middle {
+    color: blue;
+}
+#high {
+    color: red;
+}

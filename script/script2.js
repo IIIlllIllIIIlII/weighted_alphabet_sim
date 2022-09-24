@@ -2,7 +2,10 @@
 
 const defaultmProb = 3/7;
 const defaultlProb = 97/15;
-
+const middleAlphas = ['A', 'E', 'I', 'L', 'O', 'S', 'W'];
+/**
+ * 일반 알파벳 상자
+ */
 class NormalAlphabetBox {
     // Private Fields
     #mProb;
@@ -16,7 +19,7 @@ class NormalAlphabetBox {
                         'F', 'G', 'I', 'J', 'K',
                         'L', 'O', 'P', 'Q', 'S',
                         'T', 'U', 'V', 'W', 'X',
-                        'Y', 'Z']
+                        'Y', 'Z'];
         this.weights = [this.#mProb, this.#lProb, this.#lProb, this.#lProb, this.#mProb,
                         this.#lProb, this.#lProb, this.#mProb, this.#lProb, this.#lProb,
                         this.#mProb, this.#mProb, this.#lProb, this.#lProb, this.#mProb,
@@ -40,6 +43,9 @@ class NormalAlphabetBox {
     }
 }
 
+/**
+ * 불꽃 알파벳 상자
+ */
 class HighAlphabetBox {
     // Private Fields
     #hProb;
@@ -52,6 +58,9 @@ class HighAlphabetBox {
     }
 }
 
+/**
+ * 시뮬레이터
+ */
 class Simulator {
     // Private Fields
     #boxes;
@@ -71,14 +80,27 @@ class Simulator {
      * @param {String} type 상자 종류(normal, high)
      */
     simulate(type) {
+        /**
+         * 가중치가 적용된 랜덤 알파벳을 뽑기 위한 내부 함수
+         * @param {Array} contents 상자의 내용
+         * @param {Array} weights 상자의 가중치 정보
+         * @returns 알파벳
+         */
         function _pickWeightedRandomAlphabet(contents, weights) {
             return math.pickRandom(contents, weights);
         }
+
+        /**
+         * 결과 업데이트를 위한 내부 함수
+         * @param {String} alpha 알파벳 
+         */
         function _updateResults(alpha) {
             _obj.#resultObject.totalCounts += 1;
             let alphaCountsMap = _obj.#resultObject.alphabetCounts;
             let alphaCount = alphaCountsMap.get(alpha);
+
             alphabetCountsMap.set(alpha, alphaCount + 1);
+            HTMLElementController.updateTable(alpha, alphaCount + 1);
         }
 
         let _obj = this;
@@ -100,6 +122,9 @@ class Simulator {
     }
 }
 
+/**
+ * 시뮬레이션 결과 객체
+ */
 class SimulationResult {
     #totalCounts;
     #alphabetCounts;
@@ -116,16 +141,17 @@ class SimulationResult {
     }
 }
 
+/**
+ * HTML Element Controller (Static)
+ */
 class HTMLElementController {
-    constructor() {
-        this.bodyElem = document.body;
-        this.tdElems = new Map();
-    }
+    static bodyElem = document.body
+    static tdElems = new Map();
 
     /**
      * 알파벳 결과 테이블 생성
      */
-    createTable() {
+    static createTable() {
         let tableElem = document.createElement("table");
         let tbodyElem = document.createElement("tbody");
         for (let i = 0; i < 12; i++) {
@@ -139,7 +165,7 @@ class HTMLElementController {
 
                     tdElem.textContent = alpha + ": 0개";
 
-                    tdElems.set(alpha, tdElem);
+                    HTMLElementController.tdElems.set(alpha, tdElem);
 
                     trElem.appendChild(tdElem);
                 }
@@ -148,13 +174,20 @@ class HTMLElementController {
             tbodyElem.appendChild(trElem);
         }
         tableElem.appendChild(tbodyElem);
-        this.bodyElem.appendChild(tableElem);
+        HTMLElementController.bodyElem.appendChild(tableElem);
     }
-    rewriteTable() {
+    /**
+     * 결과 표 업데이트
+     * @param {String} alpha 
+     * @param {Number} count 
+     */
+    static updateTable(alpha, count) {
+        let tdElem = HTMLElementController.tdElems.get(alpha);
 
+        tdElem.textContent = alpha + ": " + count + "개";
     }
-    rewriteResultText() {
-        
+    static rewriteResultText() {
+
     }
 
     /**
