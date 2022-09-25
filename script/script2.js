@@ -3,6 +3,8 @@
 const defaultmProb = 3/7;
 const defaultlProb = 97/15;
 const middleAlphas = ['A', 'E', 'I', 'L', 'O', 'S', 'W'];
+const highAlphas = ['H', 'M', 'N', 'R'];
+
 /**
  * 일반 알파벳 상자
  */
@@ -12,8 +14,8 @@ class NormalAlphabetBox {
     #lProb;
 
     constructor() {
-        this.#mProb = window.defaultmProb;
-        this.#lProb = window.defaultlProb;
+        this.#mProb = defaultmProb;
+        this.#lProb = defaultlProb;
 
         this.contents = ['A', 'B', 'C', 'D', 'E',
                         'F', 'G', 'I', 'J', 'K',
@@ -120,6 +122,11 @@ class Simulator {
         normalBox.mProb = mProb;
         normalBox.lProb = lProb;
     }
+
+    // Getter
+    get boxes() {
+        return this.#boxes
+    }
 }
 
 /**
@@ -145,6 +152,7 @@ class SimulationResult {
  * HTML Element Controller (Static)
  */
 class HTMLElementController {
+    static totalTableElem = document.getElementById("total_table");
     static bodyElem = document.body
     static tdElems = new Map();
 
@@ -163,9 +171,29 @@ class HTMLElementController {
                 if (alpha >= 'A' && alpha <= 'Z') {
                     let tdElem = document.createElement("td");
 
-                    tdElem.textContent = alpha + ": 0개";
+                    if (middleAlphas.includes(alpha)) {
+                        let strongElem = document.createElement("strong");
+                        strongElem.setAttribute("class", "middle");
 
-                    HTMLElementController.tdElems.set(alpha, tdElem);
+                        strongElem.textContent = alpha + ": 0개";
+
+                        HTMLElementController.tdElems.set(alpha, strongElem);
+
+                        tdElem.appendChild(strongElem);
+                    } else if (highAlphas.includes(alpha)) {
+                        let strongElem = document.createElement("strong");
+                        strongElem.setAttribute("class", "high");
+
+                        strongElem.textContent = alpha + ": 0개";
+
+                        HTMLElementController.tdElems.set(alpha, strongElem);
+
+                        tdElem.appendChild(strongElem);
+                    } else {
+                        tdElem.innerText = alpha + ": 0개";
+
+                        HTMLElementController.tdElems.set(alpha, tdElem);
+                    }
 
                     trElem.appendChild(tdElem);
                 }
@@ -174,7 +202,7 @@ class HTMLElementController {
             tbodyElem.appendChild(trElem);
         }
         tableElem.appendChild(tbodyElem);
-        HTMLElementController.bodyElem.appendChild(tableElem);
+        HTMLElementController.totalTableElem.appendChild(tableElem);
     }
     /**
      * 결과 표 업데이트
@@ -193,6 +221,26 @@ class HTMLElementController {
     /**
      * HTML Element에 이벤트를 등록
      */
-    static eventRegister() {
+    static addEvents() {
+        function showProbabilities() {
+            let normalBox = simulator.boxes.get("normal")
+            let mProb = normalBox.mProb;
+            let lProb = normalBox.lProb;
+
+            let probString = "현재 설정된 확률입니다.\n\n" +
+            "<일반 상자 확률 정보>\n\n" + 
+            "희귀도 중 (a, e, i, l, o, s, w): 알파벳 하나당 약 " + (mProb.toFixed(2)) + "%\n" +
+            "희귀도 하: 알파벳 하나당 약 " + (lProb.toFixed(2)) + "%\n\n" +
+            "임의로 정해진 확률입니다. 인게임 확률과 다를 수 있습니다.\n\n" + 
+            "제작: 인벤 Illllilllli";
+            alert(probString);
+        }
+        let probBtnElem = document.getElementById("prob");
+
+        probBtnElem.addEventListener("click", showProbabilities);
     }
 }
+
+simulator = new Simulator();
+HTMLElementController.createTable();
+HTMLElementController.addEvents();

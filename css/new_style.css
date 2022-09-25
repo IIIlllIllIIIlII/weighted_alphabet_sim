@@ -4,19 +4,19 @@
 .container {
     border: 1px solid black;
 }
-strong.middle {
+.middle {
     color: blue;
 }
-strong.high {
+.high {
     color: red;
 }
-.inlineFlex {
+.inline_flex {
     display: inline-flex;
 }
-.textCenter {
+.text_center {
     text-align: center;
 }
-#simBtns {
+#sim_btns {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -26,26 +26,28 @@ strong.high {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.noBorder {
+.no_border {
     border: none;
 }
-.simBtn {
+.sim_btn {
     height: 40px;
 }
 table {
     border-spacing: 14px 4px;
 }
-#resultTable {
+#total {
     border-left: 1px solid black;
     padding-left: 4px;
     padding-right: 4px;
     text-align: left;
 }
-#resultTable > div {
+#total > div {
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 #info {
     margin-top: 33.6px;
@@ -57,11 +59,36 @@ body>div:nth-child(2) {
     margin-left: 11px;
     margin-right: 11px;
 }
-
-/* 웹페이지 정상 작동을 위한 임시 코드 */
-#middle {
-    color: blue;
+#sim_section {
+    gap: 27px;
 }
-#high {
-    color: red;
+#input_number {
+    width: 59px;
+}
+.input_prob {
+    margin-left: 5px;
+    width: 43px;
+}
+#initialize {
+    height: 47px;
+    width: 221.18px;
+    margin-top: 32px;
+}
+.inline_block {
+    display: inline-block;
+}
+#set_prob {
+    margin-left: 10px;
+    width: 48.8px;
+    height: 48.8px;
+}
+#input_repetition {
+    padding: 10px;
+}
+.inputs_prob {
+    margin-bottom: 8px;
+}
+#setting_probs {
+    margin-top: 20px;
+    padding-bottom: 3px;
 }
