@@ -1,0 +1,121 @@
+body {
+    font-family: "메이플스토리";
+}
+input {
+    font-family: "메이플스토리";
+}
+#buttons {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    display: flex;
+    width: 285px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px black solid;
+    justify-content: center;
+}
+.btn {
+    height: 40px;
+}
+#simNormal {
+    float: left;
+    margin-right: 10px;
+}
+#sim {
+    float: left;
+    text-align: center;
+    margin-left: 11px;
+    margin-right: 11px;
+}
+#results {
+    float: left;
+    border-left: 1px black solid;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+#simulation {
+    border: 1px black solid;
+    float: left;
+    margin-right: 27px;
+}
+table {
+    border-spacing: 14px 4px;
+}
+#middle {
+    color: blue;
+}
+#high {
+    color: red;
+}
+.clear {
+    clear: both;
+    float: left;
+}
+#repetition {
+    border: 1px black solid;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+#inputs {
+    padding: 10px
+}
+#numberInput {
+    width: 59px;
+    text-align: center;
+}
+#custom {
+    float: left;
+    text-align: center;
+}
+.probInput {
+    width: 43px;
+    text-align: center;
+    margin-left: 5px;
+}
+#inputProb {
+    float: left;
+}
+#middleInput {
+    margin-bottom: 8px;
+}
+#setting {
+    border: 1px black solid;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right:10px;
+    margin-top: 20px;
+}
+#probSetting {
+    display: inline-block;
+}
+#probSet {
+    margin-left: 10px;
+    height: 48.8px;
+    width: 48.8px;
+}
+#initialize {
+    height: 47px;
+    width: 221.18px;
+    margin-top: 32px;
+}
+#completion {
+    clear: both;
+}
+#completion input{
+    width: 40px;
+    height: 30px;
+}
+#complete {
+    background-color: black;
+    color: white;
+}
+
+.words {
+    margin-bottom: 10px;
+}
+#simulation1 {
+    display: inline-block;
+}

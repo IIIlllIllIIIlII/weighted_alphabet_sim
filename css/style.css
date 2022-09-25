@@ -1,121 +1,94 @@
-body {
+* {
     font-family: "메이플스토리";
 }
-input {
-    font-family: "메이플스토리";
+.container {
+    border: 1px solid black;
 }
-#buttons {
+.middle {
+    color: blue;
+}
+.high {
+    color: red;
+}
+.inline_flex {
+    display: inline-flex;
+}
+.text_center {
+    text-align: center;
+}
+#sim_btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 285px;
     padding-top: 15px;
     padding-bottom: 15px;
-    text-align: center;
-    display: flex;
-    width: 285px;
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px black solid;
-    justify-content: center;
 }
-.btn {
+.no_border {
+    border: none;
+}
+.sim_btn {
     height: 40px;
-}
-#simNormal {
-    float: left;
-    margin-right: 10px;
-}
-#sim {
-    float: left;
-    text-align: center;
-    margin-left: 11px;
-    margin-right: 11px;
-}
-#results {
-    float: left;
-    border-left: 1px black solid;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-#simulation {
-    border: 1px black solid;
-    float: left;
-    margin-right: 27px;
 }
 table {
     border-spacing: 14px 4px;
 }
-#middle {
-    color: blue;
+#total {
+    border-left: 1px solid black;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: left;
 }
-#high {
-    color: red;
+#total > div {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
-.clear {
-    clear: both;
-    float: left;
+#info {
+    margin-top: 33.6px;
 }
-#repetition {
-    border: 1px black solid;
+body>div:nth-child(2) {
+    margin-bottom: 16px;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+#simulation {
+    margin-left: 11px;
+    margin-right: 11px;
 }
-#inputs {
-    padding: 10px
+#sim_section {
+    gap: 27px;
 }
-#numberInput {
+#input_number {
     width: 59px;
-    text-align: center;
 }
-#custom {
-    float: left;
-    text-align: center;
-}
-.probInput {
-    width: 43px;
-    text-align: center;
+.input_prob {
     margin-left: 5px;
-}
-#inputProb {
-    float: left;
-}
-#middleInput {
-    margin-bottom: 8px;
-}
-#setting {
-    border: 1px black solid;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right:10px;
-    margin-top: 20px;
-}
-#probSetting {
-    display: inline-block;
-}
-#probSet {
-    margin-left: 10px;
-    height: 48.8px;
-    width: 48.8px;
+    width: 43px;
 }
 #initialize {
     height: 47px;
     width: 221.18px;
     margin-top: 32px;
 }
-#completion {
-    clear: both;
-}
-#completion input{
-    width: 40px;
-    height: 30px;
-}
-#complete {
-    background-color: black;
-    color: white;
-}
-
-.words {
-    margin-bottom: 10px;
-}
-#simulation1 {
+.inline_block {
     display: inline-block;
+}
+#set_prob {
+    margin-left: 10px;
+    width: 48.8px;
+    height: 48.8px;
+}
+#input_repetition {
+    padding: 10px;
+}
+.inputs_prob {
+    margin-bottom: 8px;
+}
+#setting_probs {
+    margin-top: 20px;
+    padding-bottom: 3px;
 }

@@ -10,68 +10,69 @@
     <header>
         <h1>알파벳 상자 시뮬레이터</h1>
     </header>
-    <p>알파벳 상자 시뮬레이터입니다.</p>
-    <p>* 정확한 확률이 공개되지 않은 관계로 임의로 확률을 지정하였습니다. 실제 확률과 다를 확률이 매우 높습니다.&nbsp;
-    <input type="button" id="prob" value="확률 정보"></p>
-    <section id="simulations">
-        <section id="simulation1">
-            <section id="simulation">
-                <div id="sim">
-                    <div id="buttons">
-                        <span id="simNormal">
-                            <input class="btn" type="button" id="normalBox" value="일반 상자 시뮬레이션">
-                        </span>
-                        <span id="simHigh">
-                            <input class="btn" type="button" id="highBox" value="불꽃 상자 시뮬레이션">
-                        </span>
-                    </div>
-                    <p id="resultsAlpha">알파벳을 뽑아보세요!</p>
-                    <p id="middleCounts">희귀도 중 횟수: 0</p>
-                    <p id="totalNormalCounts">일반 상자 총 시행 횟수: 0</p>
-                    <p id="totalHighCounts">불꽃 상자 총 시행 횟수: 0</p>
-                    <p><br><strong id="middle">푸른색: 희귀도 중 알파벳</strong></p>
-                    <p><strong id="high">빨간색: 불꽃 상자 알파벳</strong>
-                    </p>
+    <div class="container no_border">
+        <p>알파벳 상자 시뮬레이터입니다.</p>
+        <div class="container no_border">
+            <span class="item">* 정확한 확률이 공개되지 않은 관계로 임의로 확률을 지정하였습니다. 실제 확률과 다를 확률이 매우 높습니다.&nbsp;</span>
+            <input class="item" type="button" id="prob" value="확률 정보">
+        </div>
+    </div>
+    <section class="inline_flex" id="sim_section">
+        <div class="container text_center inline_flex">
+            <div class="container no_border" id="simulation">
+                <div class="container" id="sim_btns">
+                    <input class="item sim_btn" type="button" value="일반 상자 시뮬레이션">
+                    <input class="item sim_btn" type="button" value="불꽃 상자 시뮬레이션">
                 </div>
-                <div id="results">
-                    <p id="total"></p>
+                <div class="container no_border">
+                    <p class="item" id="results_alpha">알파벳을 뽑아보세요!</p>
+                    <p class="item" id="middle_counts">희귀도 중 횟수: 0</p>
+                    <p class="item" id="total_normal_counts">일반 상자 총 시행 횟수: 0</p>
+                    <p class="item" id="total_high_counts">불꽃 상자 총 시행 횟수: 0</p>
                 </div>
-            </section>
-            <section id="custom">
-                <section id="repetition">
-                    <p>반복 시행</p>
-                    <div id="radioButtons">
-                        <input type="radio" name="radioButtons" id="choiceNormal" value="normal"><label for="choiceNormal">일반 상자</label>
-                        <input type="radio" name="radioButtons" id="choiceHigh" value="high"><label for="choiceHigh">불꽃 상자</label>
-                    </div>
-                    <div id="inputs">
-                        <span id="times">횟수:</span>
-                        <input type="number" id="numberInput">
-                        <span>회</span>
-                        <input type="button" id="repeat" value="시행">
-                    </div>
-                </section>
-                <section id="setting">
-                    <p>일반 상자 확률 설정</p>
-                    <div id="probSetting">
-                        <div id="inputProb">
-                            <div id="middleInput">
-                                <span id="middle">희귀도 중:</span>
-                                <input type="number" class="probInput">
-                                <span>%</span>
-                            </div>
-                            <div id="lowInput">
-                                <span id="low">희귀도 하:</span>
-                                <input type="number" class="probInput">
-                                <span>%</span>
-                            </div>
+                <div class="container no_border" id="info">
+                    <p class="item"><strong class="middle">푸른색: 희귀도 중 알파벳</strong></p>
+                    <p class="item"><strong class="high">빨간색: 불꽃 상자 알파벳</strong></p>
+                </div>
+            </div>
+            <div class="container no_border" id="total">
+                <div class="container no_border" id="total_table"></div>
+            </div>
+        </div>
+        <div class="container no_border text_center">
+            <div class="container">
+                <p>반복 시행</p>
+                <div class="container no_border">
+                    <input class="item" type="radio" name="radio_buttons" id="choice_normal" value="normal"><label for="choice_normal">일반 상자</label>
+                    <input class="item" type="radio" name="radio_buttons" id="choice_high" value="high"><label for="choice_high">불꽃 상자</label>
+                </div>
+                <div class="container no_border" id="input_repetition">
+                    <span class="item">횟수:</span>
+                    <input class="item" type="number" id="input_number">
+                    <span class="item">회</span>
+                    <input class="item" type="button" id="repeat" value="시행">
+                </div>
+            </div>
+            <div class="container" id="setting_probs">
+                <p>일반 상자 확률 설정</p>
+                <div class="container no_border inline_flex">
+                    <div class="container no_border inline_block">
+                        <div class="container inputs_prob no_border">
+                            <span class="item middle">희귀도 중:</span>
+                            <input class="item input_prob" type="number">
+                            <span class="item">%</span>
                         </div>
-                        <input type="button" id="probSet" value="설정">
+                        <div class="container inputs_prob no_border">
+                            <span class="item">희귀도 하:</span>
+                            <input class="item input_prob" type="number">
+                            <span class="item">%</span>
+                        </div>
                     </div>
-                </section>
-                <input type="button" id="initialize" value="시뮬레이션 초기화">
-            </section>
-        </section>
+                    <input class="item" type="button" id="set_prob" value="설정">
+                </div>
+            </div>
+            <input class="item" type="button" id="initialize" value="시뮬레이션 초기화">
+        </div>
     </section>
 </body>
 <script src="script/script.js"></script>
