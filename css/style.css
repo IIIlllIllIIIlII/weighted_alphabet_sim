@@ -92,3 +92,10 @@ body>div:nth-child(2) {
     margin-top: 20px;
     padding-bottom: 3px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input {
+    text-align: center;
+}

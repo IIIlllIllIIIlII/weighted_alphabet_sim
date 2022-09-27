@@ -105,7 +105,7 @@ class Simulator {
             alphaCountsMap.set(alpha, alphaCount + 1);
 
             HTMLElementController.updateTable(alpha, alphaCount + 1);
-            HTMLElementController.updateResultTexts(alpha)
+            HTMLElementController.updateResultTexts(alpha);
 
             if (middleAlphas.includes(alpha)) {
                 resultObject.middleTotalCounts += 1;
@@ -117,6 +117,11 @@ class Simulator {
 
         let alpha = _pickWeightedRandomAlphabet(box.contents, box.weights);
         _updateResults(alpha);
+    }
+    repeat(type, times) {
+        for (let i = 0; i < times; i++) {
+            this.simulate(type, times);
+        }
     }
 
     /**
@@ -195,7 +200,7 @@ class SimulationResult {
  */
 class HTMLElementController {
     static totalTableElem = document.getElementById("total_table");
-    static bodyElem = document.body
+    static bodyElem = document.body;
     static tdElems = new Map();
 
     /**
@@ -256,17 +261,35 @@ class HTMLElementController {
 
         tdElem.textContent = alpha + ": " + count + "개";
     }
+
+    static initializeTable() {
+        for (let key of HTMLElementController.tdElems.keys()) {
+            HTMLElementController.tdElems.get(key).textContent = key + ": 0개";
+        }
+    }
+    static initializeResultTexts() {
+        let resultsAlphaElem = document.getElementById("results_alpha");
+        let middleCountsElem = document.getElementById("middle_counts");
+        let totalNormalCountsElem = document.getElementById("total_normal_counts");
+        let totalHighCountsElem = document.getElementById("total_high_counts");
+
+        resultsAlphaElem.textContent = "알파벳을 뽑아보세요!";
+        middleCountsElem.textContent = "희귀도 중 횟수: 0";
+        totalNormalCountsElem.textContent = "일반 상자 총 시행 횟수: 0";
+        totalHighCountsElem.textContent = "불꽃 상자 총 시행 횟수: 0";
+    }
+
     static updateResultTexts(alpha) {
         function updateResultsAlpha(alpha) {
             let resultsAlphaElem = document.getElementById("results_alpha");
-            let resultsAlphainnerHTML = ""
+            let resultsAlphainnerHTML = "";
             let strongHTML = "<strong>" + alpha + "</strong>";
-            let suffix = ""
+            let suffix = "";
 
             if (middleAlphas.includes(alpha)) {
                 suffix = "<strong class=\"middle\">" + " (희귀도 중)" + "</strong>";
             } else if (highAlphas.includes(alpha)) {
-                suffix = "<strong class=\"high\">" + " (희귀도 싱)" + "</strong>";
+                suffix = "<strong class=\"high\">" + " (희귀도 상)" + "</strong>";
             }
 
             resultsAlphainnerHTML = "알파벳 " + strongHTML + "가 나왔습니다!" + suffix;
@@ -301,18 +324,90 @@ class HTMLElementController {
             "제작: 인벤 Illllilllli";
             alert(probString);
         }
+
+        // 유효성 검사 내부 함수
+
+        /**
+         * 반복과 관련한 설정이 유효한지 검사하여 결과를 반환
+         * @param {String} choice 선택
+         * @param {Number} times 횟수
+         * @returns {Boolean} 검사 결과
+         */
+        function isValidRepetition(choice, times) {
+            let result = null;
+            
+            if (choice == null) {
+                alert("상자 종류를 선택해주세요!")
+                result = false;
+            } else if (!(Number.isInteger(times) && times > 0)) {
+                alert("반복 횟수는 자연수만 가능합니다.");
+                result = false;
+            } else {
+                result = true;
+            }
+
+            return result;
+        }
+        /**
+         * 확률 설정이 유효한지 검사
+         * @param {Number} inputValue 희귀도에 따른 확률
+         * @param {Number} multipleTimes 희귀도 알파벳 개수
+         * @returns {Boolean} 검사 결과
+         */
+        function isValidProbInput(inputValue, multipleTimes) {
+            let result = null;
+
+            if (inputValue * multipleTimes > 100) {
+                alert("총합이 100%보다 큽니다!");
+                result = false;
+            } else if (inputValue < 0) {
+                alert('0% 이상으로 입력하세요.');
+                result = false;
+            } else {
+                result = true;
+            }
+            return result;
+        }
+        let repetitionType = null;
+        let repetitionTimes = null;
+        
         let probBtnElem = document.getElementById("prob");
         let simBtns = document.getElementsByClassName("sim_btn");
+        let repeatBtnElem = document.getElementById("repeat");
+        let probInputs = document.getElementsByClassName("input_prob");
+        let initializeBtn= document.getElementById("initialize");
 
         simBtns[0].addEventListener("click", function() {simulator.simulate("normal");});
         simBtns[1].addEventListener("click", function() {simulator.simulate("high");});
 
         probBtnElem.addEventListener("click", showProbabilities);
 
-        // 오른쪽 확률 설정 부분 구현하기 (아마 복붙할것 같긴 한데...)
+        repeatBtnElem.addEventListener("click", function() {
+            let type = null;
+
+            try {
+                type = document.querySelector("input[name='radio_buttons']:checked").value;
+            } catch {
+                type = null;
+            }
+            let times = Number(document.getElementById("input_number").value);
+
+            if (isValidRepetition(type, times)) {
+                simulator.repeat(type, times);
+            }
+        })
+
+        initializeBtn.addEventListener("click", initialize);
     }
 }
 
-simulator = new Simulator();
+function initialize() {
+    simulator = new Simulator();
+
+    HTMLElementController.initializeTable();
+    HTMLElementController.initializeResultTexts();
+}
+
+var simulator = new Simulator();
 HTMLElementController.createTable();
 HTMLElementController.addEvents();
