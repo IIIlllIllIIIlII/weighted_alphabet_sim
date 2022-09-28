@@ -202,6 +202,7 @@ class HTMLElementController {
     static totalTableElem = document.getElementById("total_table");
     static bodyElem = document.body;
     static tdElems = new Map();
+    static probInputs = document.getElementsByClassName("input_prob")
 
     /**
      * 알파벳 결과 테이블 생성
@@ -324,6 +325,21 @@ class HTMLElementController {
             "제작: 인벤 Illllilllli";
             alert(probString);
         }
+        function balanceProbInputs(elem, idx, array) {
+            const lenArray = [7, 15]
+            let counterIdx = 1 - idx;
+            let counterProb = array[counterIdx]
+            
+            let inputProbValue = Number(Number(elem.value).toFixed(2));
+            elem.value = inputProbValue;
+
+            if (!(isValidProbInput(inputProbValue, lenArray[idx]))) {
+                elem.value = null;
+                return;
+            }
+            let counterProbValue = ((100 - (inputProbValue * lenArray[idx])) / lenArray[counterIdx]).toFixed(2);
+            counterProb.value = counterProbValue;
+        }
 
         // 유효성 검사 내부 함수
 
@@ -368,13 +384,11 @@ class HTMLElementController {
             }
             return result;
         }
-        let repetitionType = null;
-        let repetitionTimes = null;
         
         let probBtnElem = document.getElementById("prob");
         let simBtns = document.getElementsByClassName("sim_btn");
         let repeatBtnElem = document.getElementById("repeat");
-        let probInputs = document.getElementsByClassName("input_prob");
+        let setProbElem = document.getElementById("set_prob");
         let initializeBtn= document.getElementById("initialize");
 
         simBtns[0].addEventListener("click", function() {simulator.simulate("normal");});
@@ -397,6 +411,20 @@ class HTMLElementController {
             }
         })
 
+        Array.prototype.map.call(HTMLElementController.probInputs, function(elem, idx, array) {
+            elem.addEventListener("change", function() {balanceProbInputs(elem, idx, array);})});
+        
+        setProbElem.addEventListener("click", function() {
+            if (HTMLElementController.probInputs[0].value && HTMLElementController.probInputs[1].value) {
+                let mProb = Number(HTMLElementController.probInputs[0].value);
+                let lProb = Number(HTMLElementController.probInputs[1].value);
+
+                simulator.setProbabilities(lProb, mProb);
+            } else {
+                alert("확률 설정이 잘못되었습니다.");
+            }
+        })
+
         initializeBtn.addEventListener("click", initialize);
     }
 }
@@ -406,8 +434,13 @@ function initialize() {
 
     HTMLElementController.initializeTable();
     HTMLElementController.initializeResultTexts();
+    HTMLElementController.probInputs[0].value = defaultmProb.toFixed(2);
+    HTMLElementController.probInputs[1].value = defaultlProb.toFixed(2);
+    document.getElementById("input_number").value = null;
 }
 
 var simulator = new Simulator();
 HTMLElementController.createTable();
 HTMLElementController.addEvents();
+HTMLElementController.probInputs[0].value = defaultmProb.toFixed(2);
+HTMLElementController.probInputs[1].value = defaultlProb.toFixed(2);
